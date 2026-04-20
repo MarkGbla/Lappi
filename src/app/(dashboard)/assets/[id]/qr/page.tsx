@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import QRCode from "qrcode"
 import { prisma } from "@/lib/db"
+import { getBaseUrl } from "@/lib/base-url"
 import { PageHeader } from "@/components/layout/page-header"
 import { Card, CardContent } from "@/components/ui/card"
 import { PrintButton } from "@/components/shared/print-button"
@@ -14,8 +15,7 @@ export default async function AssetQrPage({
   const asset = await prisma.asset.findUnique({ where: { id } })
   if (!asset) notFound()
 
-  const baseUrl = process.env.NEXTAUTH_URL ?? ""
-  const targetUrl = `${baseUrl}/assets/${asset.id}`
+  const targetUrl = `${getBaseUrl()}/scan/${asset.id}`
   const dataUrl = await QRCode.toDataURL(targetUrl, { margin: 1, width: 400 })
 
   return (

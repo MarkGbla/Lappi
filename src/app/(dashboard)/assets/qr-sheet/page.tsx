@@ -1,5 +1,6 @@
 import QRCode from "qrcode"
 import { prisma } from "@/lib/db"
+import { getBaseUrl } from "@/lib/base-url"
 import { PageHeader } from "@/components/layout/page-header"
 import { PrintButton } from "@/components/shared/print-button"
 
@@ -16,11 +17,11 @@ export default async function QrSheetPage({
     orderBy: { name: "asc" },
   })
 
-  const baseUrl = process.env.NEXTAUTH_URL ?? ""
+  const baseUrl = getBaseUrl()
   const labels = await Promise.all(
     assets.map(async (a) => ({
       ...a,
-      dataUrl: await QRCode.toDataURL(`${baseUrl}/assets/${a.id}`, {
+      dataUrl: await QRCode.toDataURL(`${baseUrl}/scan/${a.id}`, {
         margin: 1,
         width: 200,
       }),

@@ -60,7 +60,11 @@ export default async function IssueDetailPage({
             </div>
             <div>
               <div className="text-xs font-medium text-muted-foreground uppercase">Reported By</div>
-              <div className="mt-1 text-sm">{issue.reportedBy.firstName} {issue.reportedBy.lastName}</div>
+              <div className="mt-1 text-sm">
+                {issue.source === "PUBLIC"
+                  ? "Community Reporter (anonymous QR scan)"
+                  : `${issue.reportedBy.firstName} ${issue.reportedBy.lastName}`}
+              </div>
             </div>
             <div>
               <div className="text-xs font-medium text-muted-foreground uppercase">Assigned To</div>

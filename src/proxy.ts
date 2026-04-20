@@ -12,6 +12,8 @@ export function proxy(request: NextRequest) {
     pathname === "/login" ||
     pathname.startsWith("/api/auth") ||
     pathname.startsWith("/api/uploadthing") ||
+    pathname.startsWith("/api/public/") ||
+    pathname.startsWith("/scan/") ||
     pathname.startsWith("/_next") ||
     /\.(ico|png|jpe?g|svg|webp|gif|webmanifest|js|css|map|woff2?|ttf)$/i.test(pathname)
   ) {

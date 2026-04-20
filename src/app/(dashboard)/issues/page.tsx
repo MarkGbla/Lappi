@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db"
 import { Button } from "@/components/ui/button"
 import { PageHeader } from "@/components/layout/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
+import { Badge } from "@/components/ui/badge"
 import { EmptyState } from "@/components/shared/empty-state"
 import { FilterBar } from "@/components/shared/filter-bar"
 import { Pagination } from "@/components/shared/pagination"
@@ -128,9 +129,19 @@ export default async function IssuesPage({
                 className="flex flex-col gap-2 p-4 pr-12 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
-                  <div className="font-medium">{issue.title}</div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">{issue.title}</span>
+                    {issue.source === "PUBLIC" && (
+                      <Badge variant="outline" className="text-[10px] uppercase tracking-wide">
+                        Public
+                      </Badge>
+                    )}
+                  </div>
                   <div className="text-sm text-muted-foreground">
-                    {issue.asset.name} &middot; Reported by {issue.reportedBy.firstName} {issue.reportedBy.lastName}
+                    {issue.asset.name} &middot; Reported by{" "}
+                    {issue.source === "PUBLIC"
+                      ? "Community Reporter (QR scan)"
+                      : `${issue.reportedBy.firstName} ${issue.reportedBy.lastName}`}
                     {issue.assignedTo && (
                       <> &middot; Assigned to {issue.assignedTo.firstName} {issue.assignedTo.lastName}</>
                     )}

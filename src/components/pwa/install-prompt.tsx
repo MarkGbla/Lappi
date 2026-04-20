@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import {
   DownloadSimple,
   Export,
@@ -51,6 +52,8 @@ function isStandalone(): boolean {
 }
 
 export function InstallPrompt() {
+  const pathname = usePathname()
+  const suppressed = pathname?.startsWith("/scan") ?? false
   const [platform] = useState<Platform>(() =>
     typeof window === "undefined" ? "other" : detectPlatform()
   )
@@ -64,6 +67,7 @@ export function InstallPrompt() {
       navigator.serviceWorker.register("/sw.js").catch(() => {})
     }
 
+    if (suppressed) return
     if (isStandalone()) return
     if (localStorage.getItem(DISMISS_KEY)) return
 
@@ -94,7 +98,7 @@ export function InstallPrompt() {
       const t = window.setTimeout(() => setBannerOpen(true), IOS_DELAY_MS)
       return () => window.clearTimeout(t)
     }
-  }, [platform])
+  }, [platform, suppressed])
 
   function dismiss() {
     setBannerOpen(false)

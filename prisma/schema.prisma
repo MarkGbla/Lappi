@@ -66,6 +66,11 @@ enum IssueStatus {
   CLOSED
 }
 
+enum IssueSource {
+  STAFF
+  PUBLIC
+}
+
 enum Urgency {
   LOW
   MEDIUM
@@ -164,6 +169,7 @@ model Issue {
   description     String
   severity        Severity
   status          IssueStatus @default(OPEN)
+  source          IssueSource @default(STAFF)
   resolutionNotes String?
   repairCost      Decimal?    @db.Decimal(10, 2)
   createdAt       DateTime    @default(now())
@@ -177,6 +183,20 @@ model Issue {
   @@index([status, severity])
   @@index([assetId])
   @@index([assignedToId])
+  @@index([source])
+}
+
+// Rate-limit bookkeeping for anonymous /scan/[id] issue submissions.
+// No FKs — writes happen before we know whether the issue insert succeeds,
+// and we want to rate-limit even failed/aborted submissions.
+model IssueSubmissionLog {
+  id        String   @id @default(cuid())
+  ip        String
+  assetId   String
+  createdAt DateTime @default(now())
+
+  @@index([ip, createdAt])
+  @@index([assetId, createdAt])
 }
 
 model TechRequest {
