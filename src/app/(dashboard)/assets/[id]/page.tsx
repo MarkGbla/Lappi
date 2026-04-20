@@ -205,8 +205,11 @@ export default async function AssetDetailPage({
                 <div>
                   <div className="text-sm font-medium">{issue.title}</div>
                   <div className="text-xs text-muted-foreground">
-                    Reported by {issue.reportedBy.firstName} {issue.reportedBy.lastName} &middot;{" "}
-                    {new Date(issue.createdAt).toLocaleDateString()}
+                    Reported by{" "}
+                    {issue.source === "PUBLIC"
+                      ? "Community Reporter (QR scan)"
+                      : `${issue.reportedBy.firstName} ${issue.reportedBy.lastName}`}{" "}
+                    &middot; {new Date(issue.createdAt).toLocaleDateString()}
                   </div>
                 </div>
                 <div className="flex items-center gap-2">

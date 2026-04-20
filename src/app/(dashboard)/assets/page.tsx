@@ -187,9 +187,18 @@ export default async function AssetsPage({
               </TableHeader>
               <TableBody>
                 {assets.map((asset) => (
-                  <TableRow key={asset.id}>
+                  <TableRow
+                    key={asset.id}
+                    className="relative hover:bg-accent cursor-pointer"
+                  >
                     <TableCell>
-                      <Link href={`/assets/${asset.id}`} className="font-medium hover:underline">
+                      {/* Pseudo-element stretches the link to cover the whole
+                          row so clicking any cell navigates. RowActions sits
+                          in a relative/z-10 wrapper so its menu still works. */}
+                      <Link
+                        href={`/assets/${asset.id}`}
+                        className="font-medium hover:underline before:absolute before:inset-0"
+                      >
                         {asset.name}
                       </Link>
                       {asset.serialNumber && (
@@ -205,14 +214,16 @@ export default async function AssetsPage({
                     </TableCell>
                     <TableCell className="text-sm text-muted-foreground">{asset.location ?? "—"}</TableCell>
                     <TableCell className="text-right">
-                      <RowActions
-                        id={asset.id}
-                        itemName={asset.name}
-                        editHref={`/assets/${asset.id}/edit`}
-                        onDelete={deleteAsset}
-                        successMessage="Asset deleted"
-                        description="This removes the asset permanently. If it has session or issue history, retire it instead."
-                      />
+                      <div className="relative z-10">
+                        <RowActions
+                          id={asset.id}
+                          itemName={asset.name}
+                          editHref={`/assets/${asset.id}/edit`}
+                          onDelete={deleteAsset}
+                          successMessage="Asset deleted"
+                          description="This removes the asset permanently. If it has session or issue history, retire it instead."
+                        />
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
