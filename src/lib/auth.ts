@@ -23,9 +23,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         // Env var is the source of truth for the token; the Person row just
         // anchors the session + activity log. Don't duplicate the token into
         // Person.accessToken — that field is @unique and has no second reader.
+        //
+        // Force role back to ADMIN on every sign-in: this is an internal
+        // tool with one shared login, and the whole team is trusted to
+        // perform deletes and other admin actions. Self-heals the row if
+        // someone accidentally demoted it via the People UI.
         const person = await prisma.person.upsert({
           where: { email: SHARED_STAFF_EMAIL },
-          update: { isActive: true },
+          update: { role: "ADMIN", isActive: true },
           create: {
             firstName: "Staff",
             lastName: "Team",
