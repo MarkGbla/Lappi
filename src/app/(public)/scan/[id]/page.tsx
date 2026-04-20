@@ -1,7 +1,6 @@
-import Link from "next/link"
 import Image from "next/image"
-import { notFound } from "next/navigation"
-import { ArrowSquareOut, MapPin } from "@phosphor-icons/react/dist/ssr"
+import { notFound, redirect } from "next/navigation"
+import { MapPin } from "@phosphor-icons/react/dist/ssr"
 import { prisma } from "@/lib/db"
 import { getSession } from "@/lib/auth-helpers"
 import { keyToUrl } from "@/lib/ut-url"
@@ -39,6 +38,14 @@ export default async function ScanAssetPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
+
+  // Signed-in staff scanning a QR expect the full dashboard view (history,
+  // issues, edit controls). Redirect before hitting the public query so we
+  // never render the curated card for someone who has permission to see
+  // the real thing.
+  const session = await getSession()
+  if (session) redirect(`/assets/${id}`)
+
   const asset = await prisma.asset.findUnique({
     where: { id },
     select: {
@@ -52,24 +59,11 @@ export default async function ScanAssetPage({
   })
   if (!asset || asset.status === "RETIRED") notFound()
 
-  const session = await getSession()
   const status = STATUS_LABELS[asset.status]
   const imageUrl = asset.imageKeys[0] ? keyToUrl(asset.imageKeys[0]) : null
 
   return (
     <div className="space-y-6">
-      {session && (
-        <div className="flex justify-end">
-          <Link
-            href={`/assets/${asset.id}`}
-            className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-          >
-            View in dashboard
-            <ArrowSquareOut size={12} />
-          </Link>
-        </div>
-      )}
-
       <Card>
         <CardContent className="p-0 overflow-hidden">
           {imageUrl ? (
