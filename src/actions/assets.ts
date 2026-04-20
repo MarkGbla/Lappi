@@ -80,9 +80,6 @@ export async function updateAsset(id: string, input: unknown): Promise<ActionRes
 
 export async function deleteAsset(id: string): Promise<ActionResult<void>> {
   const user = await requireAuth()
-  if (user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can delete assets" }
-  }
 
   const existing = await prisma.asset.findUnique({
     where: { id },

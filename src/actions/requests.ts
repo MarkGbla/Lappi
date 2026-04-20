@@ -48,9 +48,6 @@ export async function reviewTechRequest(
   input: unknown
 ): Promise<ActionResult<TechRequest>> {
   const user = await requireAuth()
-  if (user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can review requests" }
-  }
   const parsed = reviewRequestSchema.safeParse(input)
   if (!parsed.success) {
     return {
@@ -102,18 +99,6 @@ export async function deleteTechRequest(
   const existing = await prisma.techRequest.findUnique({ where: { id } })
   if (!existing) return { success: false, error: "Request not found" }
 
-  // A request's requester can delete their own request while it's still
-  // pending; admins can always delete.
-  const isOwner = existing.requestedById === user.id
-  const isAdmin = user.role === "ADMIN"
-  if (!isAdmin && !(isOwner && existing.status === "PENDING")) {
-    return {
-      success: false,
-      error:
-        "Only admins can delete this request. You can only delete your own pending requests.",
-    }
-  }
-
   await prisma.techRequest.delete({ where: { id } })
 
   await logActivity({
@@ -132,9 +117,6 @@ export async function fulfillTechRequest(
   requestId: string
 ): Promise<ActionResult<TechRequest>> {
   const user = await requireAuth()
-  if (user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can mark requests fulfilled" }
-  }
 
   const existing = await prisma.techRequest.findUnique({ where: { id: requestId } })
   if (!existing) return { success: false, error: "Request not found" }

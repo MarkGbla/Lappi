@@ -83,9 +83,6 @@ export async function assignIssue(input: unknown): Promise<ActionResult<Issue>> 
 
 export async function deleteIssue(id: string): Promise<ActionResult<void>> {
   const user = await requireAuth()
-  if (user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can delete issues" }
-  }
 
   const existing = await prisma.issue.findUnique({
     where: { id },

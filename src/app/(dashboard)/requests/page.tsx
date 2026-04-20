@@ -38,10 +38,7 @@ export default async function RequestsPage({
   if (status) where.status = status as Prisma.TechRequestWhereInput["status"]
   if (urgency) where.urgency = urgency as Prisma.TechRequestWhereInput["urgency"]
 
-  // Staff see only their own; admins see all
-  if (session.role !== "ADMIN") {
-    where.requestedById = session.id
-  }
+  // Internal tool: all signed-in staff see every request.
 
   const requests = await prisma.techRequest.findMany({
     where,
@@ -76,11 +73,7 @@ export default async function RequestsPage({
         ) : (
           <EmptyState
             title="No tech requests"
-            description={
-              session.role === "ADMIN"
-                ? "Staff requests will appear here."
-                : "Submit your first request for equipment or resources."
-            }
+            description="Submit a request for equipment or resources, or wait for staff to file one."
             actionLabel="New Request"
             actionHref="/requests/new"
           />
@@ -88,12 +81,8 @@ export default async function RequestsPage({
       ) : (
         <div className="space-y-3">
           {requests.map((req) => {
-            // A requester can delete their own pending request; admins can
-            // always delete. Hide the action entirely when neither applies,
-            // so non-owners don't see a Delete they'll be denied on.
-            const canDelete =
-              session.role === "ADMIN" ||
-              (req.requestedById === session.id && req.status === "PENDING")
+            // Internal tool: every signed-in staff member can delete.
+            const canDelete = true
             return (
               <div
                 key={req.id}

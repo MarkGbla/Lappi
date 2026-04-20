@@ -19,11 +19,6 @@ export async function createPerson(input: unknown): Promise<ActionResult<Person>
 
   const { password, email, phone, ...rest } = parsed.data
 
-  // Only ADMINs can create ADMIN or STAFF accounts
-  if (rest.role !== "MEMBER" && user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can create staff or admin accounts" }
-  }
-
   let hashedPassword: string | null = null
   if (rest.role !== "MEMBER" && password) {
     hashedPassword = await bcrypt.hash(password, 10)
@@ -56,11 +51,6 @@ export async function updatePerson(id: string, input: unknown): Promise<ActionRe
   const parsed = updatePersonSchema.safeParse(input)
   if (!parsed.success) {
     return { success: false, error: "Validation failed", fieldErrors: parsed.error.flatten().fieldErrors as Record<string, string[]> }
-  }
-
-  // Only ADMINs can change roles
-  if (parsed.data.role && user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can change user roles" }
   }
 
   const existing = await prisma.person.findUnique({ where: { id } })
@@ -101,11 +91,6 @@ export async function updatePerson(id: string, input: unknown): Promise<ActionRe
 export async function deactivatePerson(id: string): Promise<ActionResult<Person>> {
   const user = await requireAuth()
 
-  // Only ADMINs can deactivate accounts
-  if (user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can deactivate accounts" }
-  }
-
   // Prevent deactivating yourself
   if (id === user.id) {
     return { success: false, error: "You cannot deactivate your own account" }
@@ -131,9 +116,6 @@ export async function deactivatePerson(id: string): Promise<ActionResult<Person>
 
 export async function deletePerson(id: string): Promise<ActionResult<void>> {
   const user = await requireAuth()
-  if (user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can delete people" }
-  }
   if (id === user.id) {
     return { success: false, error: "You cannot delete your own account" }
   }
@@ -199,10 +181,6 @@ export async function deletePerson(id: string): Promise<ActionResult<void>> {
 
 export async function reactivatePerson(id: string): Promise<ActionResult<Person>> {
   const user = await requireAuth()
-
-  if (user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can reactivate accounts" }
-  }
 
   const person = await prisma.person.update({
     where: { id },

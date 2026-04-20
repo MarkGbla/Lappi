@@ -21,12 +21,8 @@ export default async function RequestDetailPage({
   })
   if (!request) notFound()
 
-  // Staff can only view their own requests
-  if (session.role !== "ADMIN" && request.requestedById !== session.id) {
-    notFound()
-  }
-
-  const isAdmin = session.role === "ADMIN"
+  // Internal tool: every signed-in staff can view any request and take
+  // admin actions on it.
 
   return (
     <div className="space-y-6">
@@ -94,9 +90,7 @@ export default async function RequestDetailPage({
         </CardContent>
       </Card>
 
-      {isAdmin && (
-        <RequestReviewActions requestId={request.id} status={request.status} />
-      )}
+      <RequestReviewActions requestId={request.id} status={request.status} />
     </div>
   )
 }

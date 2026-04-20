@@ -61,9 +61,6 @@ export async function checkOutAsset(input: unknown): Promise<ActionResult<UsageS
 
 export async function deleteSession(id: string): Promise<ActionResult<void>> {
   const user = await requireAuth()
-  if (user.role !== "ADMIN") {
-    return { success: false, error: "Only admins can delete sessions" }
-  }
 
   const existing = await prisma.usageSession.findUnique({
     where: { id },
