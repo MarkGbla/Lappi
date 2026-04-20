@@ -1,0 +1,216 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  STAFF
+  MEMBER
+}
+
+enum AssetType {
+  LAPTOP
+  DESKTOP
+  TABLET
+  PROJECTOR
+  ROUTER
+  PHONE
+  CAMERA
+  PRINTER
+  NETWORKING
+  OTHER
+}
+
+enum AssetStatus {
+  AVAILABLE
+  CHECKED_OUT
+  MAINTENANCE
+  NEEDS_ATTENTION
+  RETIRED
+}
+
+enum Condition {
+  EXCELLENT
+  GOOD
+  FAIR
+  POOR
+}
+
+enum Purpose {
+  WORKSHOP
+  COHORT
+  PERSONAL_LEARNING
+  RESEARCH
+  COMMUNITY_USE
+  STAFF_WORK
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum IssueStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum Urgency {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  DENIED
+  FULFILLED
+}
+
+// ─── Models ──────────────────────────────────────────────
+
+model Person {
+  id             String   @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String?  @unique
+  phone          String?
+  role           Role     @default(MEMBER)
+  hashedPassword String?
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  sessions       UsageSession[] @relation("SessionPerson")
+  checkedOut     UsageSession[] @relation("SessionCheckedOutBy")
+  checkedIn      UsageSession[] @relation("SessionCheckedInBy")
+
+  reportedIssues Issue[] @relation("IssueReporter")
+  assignedIssues Issue[] @relation("IssueAssignee")
+
+  techRequests     TechRequest[] @relation("RequestRequester")
+  reviewedRequests TechRequest[] @relation("RequestReviewer")
+
+  activityLogs ActivityLog[]
+
+  @@index([role])
+  @@index([isActive])
+  @@index([lastName, firstName])
+}
+
+model Asset {
+  id           String      @id @default(cuid())
+  name         String
+  type         AssetType
+  serialNumber String?     @unique
+  status       AssetStatus @default(AVAILABLE)
+  condition    Condition
+  location     String?
+  purchaseDate DateTime?
+  notes        String?
+  imageKeys    String[]    @default([])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  sessions UsageSession[]
+  issues   Issue[]
+
+  @@index([status])
+  @@index([type])
+  @@index([condition])
+}
+
+model UsageSession {
+  id                String     @id @default(cuid())
+  assetId           String
+  personId          String
+  checkedOutById    String
+  checkedInById     String?
+  purpose           Purpose
+  checkedOutAt      DateTime   @default(now())
+  checkedInAt       DateTime?
+  conditionOnReturn Condition?
+  notes             String?
+
+  asset        Asset   @relation(fields: [assetId], references: [id])
+  person       Person  @relation("SessionPerson", fields: [personId], references: [id])
+  checkedOutBy Person  @relation("SessionCheckedOutBy", fields: [checkedOutById], references: [id])
+  checkedInBy  Person? @relation("SessionCheckedInBy", fields: [checkedInById], references: [id])
+
+  @@index([assetId, checkedInAt])
+  @@index([personId])
+  @@index([checkedOutAt])
+  @@index([purpose])
+}
+
+model Issue {
+  id              String      @id @default(cuid())
+  assetId         String
+  reportedById    String
+  assignedToId    String?
+  title           String
+  description     String
+  severity        Severity
+  status          IssueStatus @default(OPEN)
+  resolutionNotes String?
+  repairCost      Decimal?    @db.Decimal(10, 2)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  resolvedAt      DateTime?
+
+  asset      Asset   @relation(fields: [assetId], references: [id])
+  reportedBy Person  @relation("IssueReporter", fields: [reportedById], references: [id])
+  assignedTo Person? @relation("IssueAssignee", fields: [assignedToId], references: [id])
+
+  @@index([status, severity])
+  @@index([assetId])
+  @@index([assignedToId])
+}
+
+model TechRequest {
+  id            String        @id @default(cuid())
+  requestedById String
+  reviewedById  String?
+  title         String
+  description   String
+  urgency       Urgency
+  status        RequestStatus @default(PENDING)
+  reviewNotes   String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  reviewedAt    DateTime?
+
+  requestedBy Person  @relation("RequestRequester", fields: [requestedById], references: [id])
+  reviewedBy  Person? @relation("RequestReviewer", fields: [reviewedById], references: [id])
+
+  @@index([status])
+  @@index([requestedById])
+}
+
+model ActivityLog {
+  id         String   @id @default(cuid())
+  personId   String
+  action     String
+  entityType String
+  entityId   String
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  person Person @relation(fields: [personId], references: [id])
+
+  @@index([entityType, entityId])
+  @@index([personId])
+  @@index([createdAt])
+}

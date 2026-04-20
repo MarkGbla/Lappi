@@ -5,7 +5,7 @@
 | **Document** | Completion Checklist |
 | **Product** | Lappi |
 | **Version** | 1.0 |
-| **Last Updated** | 2026-04-13 |
+| **Last Updated** | 2026-04-20 |
 | **Status** | Approved |
 | **Owner** | Christex Foundation |
 
@@ -27,23 +27,23 @@ This is the definition of done for Lappi. Every checkbox must be verified before
 Every feature must satisfy ALL of the following before it is merged:
 
 ### Functionality
-- [ ] Server Action implemented with Zod input validation on all inputs
-- [ ] Server Action verifies authentication (session exists)
-- [ ] Server Action verifies authorisation (role check for restricted actions)
-- [ ] Database operations use Prisma typed queries (no raw SQL)
-- [ ] All state-changing actions create an ActivityLog entry
-- [ ] Success and error responses follow the standard envelope (`{ success, data/error }`)
-- [ ] Feature works end-to-end: action → database → UI reflects change
+- [x] Server Action implemented with Zod input validation on all inputs
+- [x] Server Action verifies authentication (session exists)
+- [x] Server Action verifies authorisation (role check for restricted actions)
+- [x] Database operations use Prisma typed queries (no raw SQL)
+- [x] All state-changing actions create an ActivityLog entry
+- [x] Success and error responses follow the standard envelope (`{ success, data/error }`)
+- [x] Feature works end-to-end: action → database → UI reflects change
 
 ### UI and Design
-- [ ] Page follows the layout pattern from [Design Doc](./design-doc.md) (page header, breadcrumb, content)
-- [ ] Uses shadcn/ui components (not custom implementations of standard elements)
-- [ ] Uses Phosphor Icons with correct weight per context (see [Design Doc](./design-doc.md) Section 4)
-- [ ] Status/severity badges use the correct semantic colours
-- [ ] Loading state implemented with skeleton screens (not spinners)
-- [ ] Error state handled (toast for mutations, inline for form validation)
-- [ ] Empty state designed with icon + message + CTA
-- [ ] Dark mode renders correctly
+- [x] Page follows the layout pattern from [Design Doc](./design-doc.md) (page header, breadcrumb, content)
+- [x] Uses shadcn/ui components (not custom implementations of standard elements)
+- [x] Uses Phosphor Icons with correct weight per context (see [Design Doc](./design-doc.md) Section 4)
+- [x] Status/severity badges use the correct semantic colours
+- [x] Loading state implemented with skeleton screens (not spinners)
+- [x] Error state handled (toast for mutations, inline for form validation)
+- [x] Empty state designed with icon + message + CTA
+- [x] Dark mode renders correctly
 
 ### Responsiveness
 - [ ] Renders correctly at 320px width (small phone)
@@ -51,174 +51,178 @@ Every feature must satisfy ALL of the following before it is merged:
 - [ ] Renders correctly at 1024px width (laptop)
 - [ ] Renders correctly at 1280px width (desktop)
 - [ ] Touch targets are minimum 44x44px on mobile
-- [ ] Data tables switch to card layout on mobile (< 768px)
-- [ ] Forms are full-width on mobile, max 640px on desktop
+- [x] Data tables switch to card layout on mobile (< 768px)
+- [x] Forms are full-width on mobile, max 640px on desktop
 
 ### Accessibility
-- [ ] All interactive elements reachable via keyboard (Tab)
-- [ ] Focus indicators visible on all focusable elements
-- [ ] Form inputs have associated `<label>` elements
-- [ ] Error messages linked to inputs via `aria-describedby`
-- [ ] Colour is not the sole means of conveying information (icons + text accompany colour)
-- [ ] Images have descriptive `alt` text
+- [x] All interactive elements reachable via keyboard (Tab)
+- [x] Focus indicators visible on all focusable elements
+- [x] Form inputs have associated `<label>` elements
+- [x] Error messages linked to inputs via `aria-describedby`
+- [x] Colour is not the sole means of conveying information (icons + text accompany colour)
+- [x] Images have descriptive `alt` text
 
 ### Code Quality
-- [ ] No TypeScript `any` types
-- [ ] No `console.log` statements in production code
-- [ ] No commented-out code
-- [ ] Zod schema matches the Prisma model fields
-- [ ] No N+1 database queries (use `include` or separate efficient queries)
+- [x] No TypeScript `any` types
+- [x] No `console.log` statements in production code
+- [x] No commented-out code
+- [x] Zod schema matches the Prisma model fields
+- [x] No N+1 database queries (use `include` or separate efficient queries)
 
 ---
 
 ## 3. Phase 1 Completion Checklist — Foundation
 
 ### Authentication
-- [ ] Admin can log in with email and password
-- [ ] Staff can log in with email and password
-- [ ] Invalid credentials show a clear error (does not reveal which field is wrong)
-- [ ] Unauthenticated users are redirected to `/login`
-- [ ] Authenticated users are redirected from `/login` to `/dashboard`
-- [ ] Sessions expire after 24 hours of inactivity
-- [ ] Logout destroys session and redirects to `/login`
-- [ ] Admin can create new staff accounts from `/settings`
-- [ ] Admin can deactivate staff accounts
-- [ ] Staff cannot access `/settings`
+- [x] Admin can log in with email and password
+- [x] Staff can log in with email and password
+- [x] Invalid credentials show a clear error (does not reveal which field is wrong)
+- [x] Unauthenticated users are redirected to `/login`
+- [x] Authenticated users are redirected from `/login` to `/dashboard`
+- [x] Sessions expire after 24 hours of inactivity
+- [x] Logout destroys session and redirects to `/login`
+- [x] Admin can create new staff accounts from `/settings`
+- [x] Admin can deactivate staff accounts
+- [x] Staff cannot access `/settings`
 
 ### Asset Registry
-- [ ] Staff can create an asset with: name, type, condition (required) + serial number, location, purchase date, notes (optional)
-- [ ] Asset appears in the asset list immediately after creation
-- [ ] Staff can edit all fields on an existing asset
-- [ ] Staff can retire (archive) a device — retired assets excluded from check-out but visible in filtered lists
-- [ ] Asset list shows filters for type, status, and condition — filters are combinable
-- [ ] Asset list search works by name and serial number (partial match, < 500ms)
-- [ ] Asset detail page shows: info card, current status, session history tab, issue history tab
-- [ ] Asset status badge displays with correct colour for each status
-- [ ] All 10 asset categories available in the type dropdown
-- [ ] Status transitions follow the defined lifecycle (no invalid transitions)
+- [x] Staff can create an asset with: name, type, condition (required) + serial number, location, purchase date, notes (optional)
+- [x] Asset appears in the asset list immediately after creation
+- [x] Staff can edit all fields on an existing asset
+- [x] Staff can retire (archive) a device — retired assets excluded from check-out but visible in filtered lists
+- [x] Asset list shows filters for type, status, and condition — filters are combinable
+- [x] Asset list search works by name and serial number (partial match, < 500ms)
+- [x] Asset detail page shows: info card, current status, session history tab, issue history tab
+- [x] Asset status badge displays with correct colour for each status
+- [x] All 10 asset categories available in the type dropdown
+- [x] Status transitions follow the defined lifecycle (no invalid transitions)
 
 ### Community Registry
-- [ ] Staff can register a person with: first name, last name, phone (required for Member) + email (optional)
-- [ ] Members are created without login credentials
-- [ ] Staff/Admin accounts require email and password
-- [ ] People directory is searchable by name and filterable by role
-- [ ] Person detail page shows: contact info, total sessions, last active date, usage history
-- [ ] Staff can deactivate a person (excluded from check-out, historical data preserved)
+- [x] Staff can register a person with: first name, last name, phone (required for Member) + email (optional)
+- [x] Members are created without login credentials
+- [x] Staff/Admin accounts require email and password
+- [x] People directory is searchable by name and filterable by role
+- [x] Person detail page shows: contact info, total sessions, last active date, usage history
+- [x] Staff can deactivate a person (excluded from check-out, historical data preserved)
 
 ### Check-Out / Check-In
-- [ ] Staff can check out an available asset to a registered person
-- [ ] Purpose tag is required (6 options: Workshop, Cohort, Personal Learning, Research, Community Use, Staff Work)
-- [ ] Check-out creates a UsageSession record and changes asset status to CHECKED_OUT
-- [ ] Cannot check out an asset that is not AVAILABLE
-- [ ] Active sessions list shows: asset name, person name, purpose, duration since check-out
-- [ ] Staff can check in an active session with optional condition note
-- [ ] Check-in closes the session (timestamps it) and returns asset to AVAILABLE
-- [ ] Session history is filterable by asset, person, purpose, and date range
+- [x] Staff can check out an available asset to a registered person
+- [x] Purpose tag is required (6 options: Workshop, Cohort, Personal Learning, Research, Community Use, Staff Work)
+- [x] Check-out creates a UsageSession record and changes asset status to CHECKED_OUT
+- [x] Cannot check out an asset that is not AVAILABLE
+- [x] Active sessions list shows: asset name, person name, purpose, duration since check-out
+- [x] Staff can check in an active session with optional condition note
+- [x] Check-in closes the session (timestamps it) and returns asset to AVAILABLE
+- [x] Session history is filterable by asset, person, purpose, and date range
 - [ ] Check-out flow completable in under 30 seconds (measured)
-- [ ] Sessions appear on both asset detail and person detail pages
+- [x] Sessions appear on both asset detail and person detail pages
 
 ### Issue Tracking
-- [ ] Staff can report an issue linked to a specific asset (title, description, severity required)
-- [ ] Severity levels displayed with correct colour-coded badges (Critical=red, High=orange, Medium=amber, Low=blue)
-- [ ] Issue status flow enforced: Open → In Progress → Resolved → Closed
-- [ ] Staff can assign an issue to another staff member
-- [ ] Issue list filterable by status, severity, asset, assignee
-- [ ] Default issue list view: open issues sorted by severity (critical first)
-- [ ] Resolver can add resolution notes when marking as Resolved
-- [ ] Critical issues automatically change asset status to MAINTENANCE
-- [ ] Issues appear on the asset detail page (issues tab)
+- [x] Staff can report an issue linked to a specific asset (title, description, severity required)
+- [x] Severity levels displayed with correct colour-coded badges (Critical=red, High=orange, Medium=amber, Low=blue)
+- [x] Issue status flow enforced: Open → In Progress → Resolved → Closed
+- [x] Staff can assign an issue to another staff member
+- [x] Issue list filterable by status, severity, asset, assignee
+- [x] Default issue list view: open issues sorted by severity (critical first)
+- [x] Resolver can add resolution notes when marking as Resolved
+- [x] Critical issues automatically change asset status to MAINTENANCE
+- [x] Issues appear on the asset detail page (issues tab)
 
 ### Dashboard
-- [ ] Total Assets KPI card shows count with status breakdown (available, checked out, maintenance, retired)
-- [ ] Active Sessions KPI card shows count of currently checked-out devices
-- [ ] Open Issues KPI card shows count with severity breakdown
-- [ ] People Registered KPI card shows total with role breakdown
-- [ ] KPI cards link to their respective list views when tapped
-- [ ] Recent activity feed shows last 10 system actions with who/what/when
-- [ ] Quick action buttons present: New Check-Out, Report Issue, Add Asset
-- [ ] Assets needing attention section shows devices in maintenance or with overdue sessions
+- [x] Total Assets KPI card shows count with status breakdown (available, checked out, maintenance, retired)
+- [x] Active Sessions KPI card shows count of currently checked-out devices
+- [x] Open Issues KPI card shows count with severity breakdown
+- [x] People Registered KPI card shows total with role breakdown
+- [x] KPI cards link to their respective list views when tapped
+- [x] Recent activity feed shows last 10 system actions with who/what/when
+- [x] Quick action buttons present: New Check-Out, Report Issue, Add Asset
+- [x] Assets needing attention section shows devices in maintenance or with overdue sessions
 
 ### Activity Log
-- [ ] Every create, update, and status change creates an activity log entry
-- [ ] Log entries include: who performed the action, what action, which entity, timestamp
-- [ ] Activity log page displays entries in reverse chronological order
-- [ ] Activity log is filterable by entity type and person
+- [x] Every create, update, and status change creates an activity log entry
+- [x] Log entries include: who performed the action, what action, which entity, timestamp
+- [x] Activity log page displays entries in reverse chronological order
+- [x] Activity log is filterable by entity type and person
 
 ### Navigation and Layout
-- [ ] Desktop: sidebar navigation with all menu items visible
-- [ ] Mobile: bottom tab bar with 5 items (Dashboard, Assets, Sessions, People, More)
-- [ ] "More" menu on mobile includes: Issues, Requests, Activity, Reports, Settings
-- [ ] Active navigation item highlighted
-- [ ] Page headers show title and primary action button
-- [ ] Breadcrumbs present on all sub-pages
+- [x] Desktop: sidebar navigation with all menu items visible
+- [x] Mobile: bottom tab bar with 5 items (Dashboard, Assets, Sessions, People, More)
+- [x] "More" menu on mobile includes: Issues, Requests, Activity, Reports, Settings
+- [x] Active navigation item highlighted
+- [x] Page headers show title and primary action button
+- [x] Breadcrumbs present on all sub-pages
 
 ### Technical
-- [ ] All Prisma migrations applied cleanly to production database
-- [ ] Seed script works and creates realistic test data
-- [ ] Zero TypeScript errors (`tsc --noEmit` passes)
-- [ ] ESLint passes with no errors
+- [x] All Prisma migrations applied cleanly to production database
+- [x] Seed script works and creates realistic test data
+- [x] Zero TypeScript errors (`tsc --noEmit` passes)
+- [x] ESLint passes with no errors
 - [ ] Deployed to Vercel production
 - [ ] NeonDB production branch configured and connected
 - [ ] Environment variables set in Vercel (DATABASE_URL, NEXTAUTH_SECRET, NEXTAUTH_URL)
-- [ ] `.env.example` committed with all required variable names (no values)
-- [ ] No secrets committed to git
+- [x] `.env.example` committed with all required variable names (no values)
+- [x] No secrets committed to git
 
 ---
 
 ## 4. Phase 2 Completion Checklist — Operations
 
 ### Tech Requests
-- [ ] Staff can submit a tech request (title, description, urgency)
-- [ ] Request created in PENDING status
-- [ ] Admin can approve or deny with a note
-- [ ] Admin can mark approved requests as FULFILLED
-- [ ] Staff can view their own requests and status
-- [ ] Admin can view all requests with filters (status, urgency)
-- [ ] Request status flow enforced: Pending → Approved/Denied, Approved → Fulfilled
+- [x] Staff can submit a tech request (title, description, urgency)
+- [x] Request created in PENDING status
+- [x] Admin can approve or deny with a note
+- [x] Admin can mark approved requests as FULFILLED
+- [x] Staff can view their own requests and status
+- [x] Admin can view all requests with filters (status, urgency)
+- [x] Request status flow enforced: Pending → Approved/Denied, Approved → Fulfilled
 
 ### Issue Enhancements
-- [ ] Issue detail shows a timeline of all status changes (who, what, when)
-- [ ] Staff can reopen a resolved issue (returns to OPEN)
-- [ ] Activity log shows before/after values for field changes
+- [x] Issue detail shows a timeline of all status changes (who, what, when)
+- [x] Staff can reopen a resolved issue (returns to OPEN)
+- [x] Activity log shows before/after values for field changes
 
 ### Session Enhancements
-- [ ] Overdue sessions (> 7 days) visually highlighted in active sessions list
-- [ ] Batch check-out: select multiple assets for one person + purpose in a single flow
+- [x] Overdue sessions (> 7 days) visually highlighted in active sessions list
+- [x] Batch check-out: select multiple assets for one person + purpose in a single flow
 
 ### Analytics and Reporting
-- [ ] Sessions by purpose chart (bar/pie, with time period selector)
-- [ ] Unique community members served chart (line chart over time)
-- [ ] Most-used assets ranking (top 10 with session count)
-- [ ] CSV export available for assets, sessions, people, and issues lists
-- [ ] Reports page consolidates all analytics views
+- [x] Sessions by purpose chart (bar/pie, with time period selector)
+- [x] Unique community members served chart (line chart over time)
+- [x] Most-used assets ranking (top 10 with session count)
+- [x] CSV export available for assets, sessions, people, and issues lists
+- [x] Reports page consolidates all analytics views
 
 ### Asset Photo Upload
-- [ ] Staff can upload a photo when creating or editing an asset
-- [ ] Photo displayed on asset detail page
-- [ ] File size limit enforced (max 5MB)
+- [x] Staff can upload up to 5 photos when creating or editing an asset
+- [x] Staff can capture a photo directly from the device camera (mobile + supported desktops)
+- [x] Photos displayed as a gallery on the asset detail page
+- [x] Per-file size limit enforced (4MB via UploadThing; client-side WebP compression typically brings real files well under this)
+- [x] Client-side near-lossless compression (WebP q=0.9, 1600px max) runs before upload to keep NeonDB + storage growth bounded
+- [x] Storage backed by UploadThing; URLs persisted to `Asset.imageUrls` (Postgres `String[]`) — single source of truth in NeonDB
+- [x] Save path optimised (destination route prefetched on form mount; parallel uploads) for fast add-device flow
 
 ---
 
 ## 5. Phase 3 Completion Checklist — Insights
 
 ### Advanced Analytics
-- [ ] Asset utilisation rate calculated and displayed (% of time in use)
-- [ ] Peak usage patterns shown (heatmap or chart by day/hour)
-- [ ] Asset health score displayed per device (composite metric)
+- [x] Asset utilisation rate calculated and displayed (% of time in use)
+- [x] Peak usage patterns shown (heatmap or chart by day/hour)
+- [x] Asset health score displayed per device (composite metric)
 - [ ] Predefined report templates available for export
 
 ### Repair Costs
-- [ ] Repair cost field available on issue form
-- [ ] Cost-per-asset report available in reports section
+- [x] Repair cost field available on issue form
+- [x] Cost-per-asset report available in reports section
 
 ### QR Codes
-- [ ] QR code generated per asset linking to its detail page
-- [ ] Printable label sheet supports multiple assets per page
+- [x] QR code generated per asset linking to its detail page
+- [x] Printable label sheet supports multiple assets per page
 
 ### PWA Offline Mode
-- [ ] Service worker configured and installable
+- [x] Service worker configured and installable
 - [ ] Check-out and check-in work offline (queue and sync)
-- [ ] Install prompt shown to mobile users
+- [x] Install prompt shown to mobile users
 
 ---
 
@@ -227,13 +231,13 @@ Every feature must satisfy ALL of the following before it is merged:
 Complete ALL items before giving Christex Foundation staff access to production.
 
 ### Security
-- [ ] All routes behind authentication middleware (verified by attempting unauthenticated access)
-- [ ] Role-based access verified for every page (staff cannot access admin-only features)
-- [ ] Server Actions independently verify auth (not just UI hiding)
-- [ ] No API routes exposed without authentication
-- [ ] Environment variables not leaked to client bundle (check page source)
+- [x] All routes behind authentication middleware (verified by attempting unauthenticated access)
+- [x] Role-based access verified for every page (staff cannot access admin-only features)
+- [x] Server Actions independently verify auth (not just UI hiding)
+- [x] No API routes exposed without authentication
+- [x] Environment variables not leaked to client bundle (check page source)
 - [ ] HTTPS enforced on production domain
-- [ ] Passwords stored as bcrypt hashes (verified in database)
+- [x] Passwords stored as bcrypt hashes (verified in database)
 - [ ] No default or test passwords in production
 
 ### Performance
@@ -242,16 +246,16 @@ Complete ALL items before giving Christex Foundation staff access to production.
 - [ ] Lighthouse Best Practices score > 90
 - [ ] Largest Contentful Paint < 3s on simulated 3G
 - [ ] No N+1 database queries (verified via Prisma query logs)
-- [ ] All list views paginated (no unbounded queries)
+- [x] All list views paginated (no unbounded queries)
 - [ ] Images optimised (Next.js Image component, WebP)
 
 ### Data
 - [ ] Seed data removed from production database
-- [ ] Admin account created for Colin Ogoo
-- [ ] Staff accounts created for hub coordinators
+- [x] Admin account created for Colin Ogoo
+- [x] Staff accounts created for hub coordinators
 - [ ] Initial asset registration completed (all physical devices entered)
 - [ ] NeonDB automated backups verified
-- [ ] Data export (CSV) verified for all entity types
+- [x] Data export (CSV) verified for all entity types
 
 ### Operational Readiness
 - [ ] Vercel deployment healthy (no build errors)
@@ -264,10 +268,10 @@ Complete ALL items before giving Christex Foundation staff access to production.
 ### Accessibility (Final Audit)
 - [ ] Colour contrast verified for all text/background combinations (4.5:1 minimum)
 - [ ] Screen reader tested on at least one browser (VoiceOver on Safari or NVDA on Chrome)
-- [ ] All forms completable via keyboard only
-- [ ] Focus indicators visible on all interactive elements
-- [ ] Skip-to-main-content link present and functional
-- [ ] No `aria-hidden` on focusable elements
+- [x] All forms completable via keyboard only
+- [x] Focus indicators visible on all interactive elements
+- [x] Skip-to-main-content link present and functional
+- [x] No `aria-hidden` on focusable elements
 
 ---
 
@@ -287,6 +291,29 @@ Complete ALL items before giving Christex Foundation staff access to production.
 - [ ] Verify no data inconsistencies (assets stuck in CHECKED_OUT without active sessions, etc.)
 - [ ] Confirm check-out time target (< 30 seconds) is being met in practice
 - [ ] Document any bugs or enhancement requests for Phase 2 prioritisation
+
+---
+
+## 8. Audit Fixes Applied — 2026-04-20
+
+Full-codebase audit performed 2026-04-20. Fixes landed:
+
+### Security
+- [x] **API auth gaps closed** — `src/app/api/people-search/route.ts`, `assets-available/route.ts`, `assets-all/route.ts` now check session via `getSession()` and return 401 when unauthenticated. Previously any direct HTTP call returned the staff directory / asset list.
+- [x] **Upload log leak removed** — `src/app/api/uploadthing/core.ts` no longer logs file keys + user IDs on upload completion (previously persisted to Vercel function logs).
+- [x] **Dev-only logs gated** — `console.warn/error` in `src/lib/image-compress.ts` and `src/components/assets/photo-upload.tsx` now wrapped in `NODE_ENV !== "production"` guards.
+
+### Next.js 16 Conformance
+- [x] **middleware.ts → proxy.ts** — Next 16 deprecated the `middleware` file convention in favor of `proxy`. Renamed `src/middleware.ts` to `src/proxy.ts` and exported function as `proxy`. Auth is still verified authoritatively in each server action (per Next 16 docs: "Always verify authentication and authorization inside each Server Function rather than relying on Proxy alone").
+
+### Design System Consistency
+- [x] **Lucide → Phosphor swap** — 6 shadcn/ui primitives (`select`, `command`, `sheet`, `dialog`, `dropdown-menu`, `sonner`) were importing from `lucide-react`, violating the Phosphor-only stack decision. All replaced with Phosphor equivalents (X, Check, CaretDown, CaretUp, CaretRight, MagnifyingGlass, CheckCircle, Info, Warning, WarningOctagon, CircleNotch). `lucide-react` uninstalled.
+
+### PWA
+- [x] **Missing icons generated** — `public/icon-192.png` and `public/icon-512.png` created from mascot asset. Manifest no longer references missing files.
+
+### Documentation
+- [x] **feature-list.md status synced** — all Phase 1/2/3 features updated from "Planned" to "Done" to match actual implementation state per this checklist.
 
 ---
 

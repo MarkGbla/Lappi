@@ -5,7 +5,7 @@
 | **Document** | Feature List |
 | **Product** | Lappi |
 | **Version** | 1.0 |
-| **Last Updated** | 2026-04-13 |
+| **Last Updated** | 2026-04-20 |
 | **Status** | Approved |
 | **Owner** | Christex Foundation |
 
@@ -24,61 +24,61 @@
 
 | ID | Module | Feature | Priority | Phase | Status |
 |----|--------|---------|----------|-------|--------|
-| F-ASSET-01 | Asset Registry | Register new device | M | 1 | Planned |
-| F-ASSET-02 | Asset Registry | Edit device details | M | 1 | Planned |
-| F-ASSET-03 | Asset Registry | Retire/archive device | M | 1 | Planned |
-| F-ASSET-04 | Asset Registry | Asset list with filters | M | 1 | Planned |
-| F-ASSET-05 | Asset Registry | Asset detail page | M | 1 | Planned |
-| F-ASSET-06 | Asset Registry | Asset status lifecycle | M | 1 | Planned |
-| F-ASSET-07 | Asset Registry | Search by name/serial | M | 1 | Planned |
-| F-ASSET-08 | Asset Registry | Device photo upload | S | 2 | Planned |
-| F-ASSET-09 | Asset Registry | QR code label generation | C | 3 | Planned |
-| F-SESSION-01 | Check-out/in | Quick check-out | M | 1 | Planned |
-| F-SESSION-02 | Check-out/in | Check-in with condition note | M | 1 | Planned |
-| F-SESSION-03 | Check-out/in | Active sessions view | M | 1 | Planned |
-| F-SESSION-04 | Check-out/in | Session history (filterable) | M | 1 | Planned |
-| F-SESSION-05 | Check-out/in | Purpose tagging (6 types) | M | 1 | Planned |
-| F-SESSION-06 | Check-out/in | Overdue session alerts | S | 2 | Planned |
-| F-SESSION-07 | Check-out/in | Batch check-out | C | 2 | Planned |
-| F-PEOPLE-01 | Community Registry | Register new person | M | 1 | Planned |
-| F-PEOPLE-02 | Community Registry | Edit person details | M | 1 | Planned |
-| F-PEOPLE-03 | Community Registry | Person detail with history | M | 1 | Planned |
-| F-PEOPLE-04 | Community Registry | People directory with search | M | 1 | Planned |
-| F-PEOPLE-05 | Community Registry | Deactivate person | S | 1 | Planned |
-| F-PEOPLE-06 | Community Registry | Usage metrics per person | M | 1 | Planned |
-| F-ISSUE-01 | Issue Tracking | Report issue against asset | M | 1 | Planned |
-| F-ISSUE-02 | Issue Tracking | Severity levels (4 tiers) | M | 1 | Planned |
-| F-ISSUE-03 | Issue Tracking | Issue status flow | M | 1 | Planned |
-| F-ISSUE-04 | Issue Tracking | Assign issue to staff | M | 1 | Planned |
-| F-ISSUE-05 | Issue Tracking | Issue list with filters | M | 1 | Planned |
-| F-ISSUE-06 | Issue Tracking | Resolution notes | M | 1 | Planned |
-| F-ISSUE-07 | Issue Tracking | Auto-maintenance on critical | S | 1 | Planned |
-| F-ISSUE-08 | Issue Tracking | Issue timeline | S | 2 | Planned |
-| F-ISSUE-09 | Issue Tracking | Repair cost logging | C | 3 | Planned |
-| F-ISSUE-10 | Issue Tracking | Reopen resolved issue | S | 2 | Planned |
-| F-REQUEST-01 | Tech Requests | Submit request | M | 2 | Planned |
-| F-REQUEST-02 | Tech Requests | Approve/deny with note | M | 2 | Planned |
-| F-REQUEST-03 | Tech Requests | Mark as fulfilled | M | 2 | Planned |
-| F-REQUEST-04 | Tech Requests | My requests view | M | 2 | Planned |
-| F-REQUEST-05 | Tech Requests | All requests view (admin) | M | 2 | Planned |
-| F-ANALYTICS-01 | Analytics | Sessions by purpose chart | S | 2 | Planned |
-| F-ANALYTICS-02 | Analytics | Asset utilisation rate | S | 3 | Planned |
-| F-ANALYTICS-03 | Analytics | Unique members served | M | 2 | Planned |
-| F-ANALYTICS-04 | Analytics | Most-used assets ranking | S | 2 | Planned |
-| F-ANALYTICS-05 | Analytics | Peak usage patterns | C | 3 | Planned |
-| F-ANALYTICS-06 | Analytics | CSV export | M | 2 | Planned |
-| F-DASH-01 | Dashboard | KPI stat cards (4) | M | 1 | Planned |
-| F-DASH-02 | Dashboard | Recent activity feed | M | 1 | Planned |
-| F-DASH-03 | Dashboard | Quick action buttons | M | 1 | Planned |
-| F-DASH-04 | Dashboard | Assets needing attention | S | 1 | Planned |
-| F-LOG-01 | Activity Log | Automatic event logging | M | 1 | Planned |
-| F-LOG-02 | Activity Log | Filterable log view | M | 1 | Planned |
-| F-LOG-03 | Activity Log | Field change diffs | S | 2 | Planned |
-| F-AUTH-01 | Auth | Email/password login | M | 1 | Planned |
-| F-AUTH-02 | Auth | Route protection | M | 1 | Planned |
-| F-AUTH-03 | Auth | Role-based access | M | 1 | Planned |
-| F-AUTH-04 | Auth | Staff account management | M | 1 | Planned |
-| F-AUTH-05 | Auth | Session expiry (24h) | M | 1 | Planned |
+| F-ASSET-01 | Asset Registry | Register new device | M | 1 | Done |
+| F-ASSET-02 | Asset Registry | Edit device details | M | 1 | Done |
+| F-ASSET-03 | Asset Registry | Retire/archive device | M | 1 | Done |
+| F-ASSET-04 | Asset Registry | Asset list with filters | M | 1 | Done |
+| F-ASSET-05 | Asset Registry | Asset detail page | M | 1 | Done |
+| F-ASSET-06 | Asset Registry | Asset status lifecycle | M | 1 | Done |
+| F-ASSET-07 | Asset Registry | Search by name/serial | M | 1 | Done |
+| F-ASSET-08 | Asset Registry | Device photo upload | S | 2 | Done |
+| F-ASSET-09 | Asset Registry | QR code label generation | C | 3 | Done |
+| F-SESSION-01 | Check-out/in | Quick check-out | M | 1 | Done |
+| F-SESSION-02 | Check-out/in | Check-in with condition note | M | 1 | Done |
+| F-SESSION-03 | Check-out/in | Active sessions view | M | 1 | Done |
+| F-SESSION-04 | Check-out/in | Session history (filterable) | M | 1 | Done |
+| F-SESSION-05 | Check-out/in | Purpose tagging (6 types) | M | 1 | Done |
+| F-SESSION-06 | Check-out/in | Overdue session alerts | S | 2 | Done |
+| F-SESSION-07 | Check-out/in | Batch check-out | C | 2 | Done |
+| F-PEOPLE-01 | Community Registry | Register new person | M | 1 | Done |
+| F-PEOPLE-02 | Community Registry | Edit person details | M | 1 | Done |
+| F-PEOPLE-03 | Community Registry | Person detail with history | M | 1 | Done |
+| F-PEOPLE-04 | Community Registry | People directory with search | M | 1 | Done |
+| F-PEOPLE-05 | Community Registry | Deactivate person | S | 1 | Done |
+| F-PEOPLE-06 | Community Registry | Usage metrics per person | M | 1 | Done |
+| F-ISSUE-01 | Issue Tracking | Report issue against asset | M | 1 | Done |
+| F-ISSUE-02 | Issue Tracking | Severity levels (4 tiers) | M | 1 | Done |
+| F-ISSUE-03 | Issue Tracking | Issue status flow | M | 1 | Done |
+| F-ISSUE-04 | Issue Tracking | Assign issue to staff | M | 1 | Done |
+| F-ISSUE-05 | Issue Tracking | Issue list with filters | M | 1 | Done |
+| F-ISSUE-06 | Issue Tracking | Resolution notes | M | 1 | Done |
+| F-ISSUE-07 | Issue Tracking | Auto-maintenance on critical | S | 1 | Done |
+| F-ISSUE-08 | Issue Tracking | Issue timeline | S | 2 | Done |
+| F-ISSUE-09 | Issue Tracking | Repair cost logging | C | 3 | Done |
+| F-ISSUE-10 | Issue Tracking | Reopen resolved issue | S | 2 | Done |
+| F-REQUEST-01 | Tech Requests | Submit request | M | 2 | Done |
+| F-REQUEST-02 | Tech Requests | Approve/deny with note | M | 2 | Done |
+| F-REQUEST-03 | Tech Requests | Mark as fulfilled | M | 2 | Done |
+| F-REQUEST-04 | Tech Requests | My requests view | M | 2 | Done |
+| F-REQUEST-05 | Tech Requests | All requests view (admin) | M | 2 | Done |
+| F-ANALYTICS-01 | Analytics | Sessions by purpose chart | S | 2 | Done |
+| F-ANALYTICS-02 | Analytics | Asset utilisation rate | S | 3 | Done |
+| F-ANALYTICS-03 | Analytics | Unique members served | M | 2 | Done |
+| F-ANALYTICS-04 | Analytics | Most-used assets ranking | S | 2 | Done |
+| F-ANALYTICS-05 | Analytics | Peak usage patterns | C | 3 | Done |
+| F-ANALYTICS-06 | Analytics | CSV export | M | 2 | Done |
+| F-DASH-01 | Dashboard | KPI stat cards (4) | M | 1 | Done |
+| F-DASH-02 | Dashboard | Recent activity feed | M | 1 | Done |
+| F-DASH-03 | Dashboard | Quick action buttons | M | 1 | Done |
+| F-DASH-04 | Dashboard | Assets needing attention | S | 1 | Done |
+| F-LOG-01 | Activity Log | Automatic event logging | M | 1 | Done |
+| F-LOG-02 | Activity Log | Filterable log view | M | 1 | Done |
+| F-LOG-03 | Activity Log | Field change diffs | S | 2 | Done |
+| F-AUTH-01 | Auth | Email/password login | M | 1 | Done |
+| F-AUTH-02 | Auth | Route protection | M | 1 | Done |
+| F-AUTH-03 | Auth | Role-based access | M | 1 | Done |
+| F-AUTH-04 | Auth | Staff account management | M | 1 | Done |
+| F-AUTH-05 | Auth | Session expiry (24h) | M | 1 | Done |
 
 ---
 
@@ -276,7 +276,8 @@ Features added:
 - CSV data export
 - Field change diffs in activity log
 
-**Milestone**: Full operational workflow digitalised. Staff manage issues end-to-end, request equipment, and export data for reporting.
+**Milesto
+ne**: Full operational workflow digitalised. Staff manage issues end-to-end, request equipment, and export data for reporting.
 
 ### Phase 3 — Insights
 **Goal**: Turn data into intelligence for leadership and donors.

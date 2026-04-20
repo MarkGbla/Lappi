@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 320" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Lappi mascot">
+  <g class="leg-l">
+    <rect x="92" y="208" width="14" height="50" rx="4" fill="currentColor"/>
+    <path d="M 78 250 L 78 264 Q 78 275 92 275 L 114 275 Q 122 275 122 266 L 122 252 Z" fill="currentColor"/>
+  </g>
+  <g class="leg-r">
+    <rect x="184" y="208" width="14" height="50" rx="4" fill="currentColor"/>
+    <path d="M 168 252 L 168 266 Q 168 275 178 275 L 202 275 Q 212 275 212 264 L 212 250 Z" fill="currentColor"/>
+  </g>
+
+  <path d="M 50 185 L 240 185 L 262 222 L 28 222 Z" fill="white" stroke="currentColor" stroke-width="3.5"/>
+  <rect x="125" y="196" width="42" height="13" rx="2" fill="white" stroke="currentColor" stroke-width="2.5"/>
+  <circle cx="55" cy="185" r="2.5" fill="currentColor"/>
+  <circle cx="235" cy="185" r="2.5" fill="currentColor"/>
+
+  <rect x="50" y="35" width="190" height="150" rx="10" fill="white" stroke="currentColor" stroke-width="3.5"/>
+  <rect x="62" y="47" width="166" height="126" rx="5" fill="none" stroke="currentColor" stroke-width="2.5"/>
+
+  <g class="eye-l">
+    <circle cx="114" cy="92" r="24" fill="white" stroke="currentColor" stroke-width="3.5"/>
+    <circle cx="122" cy="98" r="9" fill="currentColor"/>
+  </g>
+  <g class="eye-r">
+    <circle cx="180" cy="92" r="24" fill="white" stroke="currentColor" stroke-width="3.5"/>
+    <circle cx="188" cy="98" r="9" fill="currentColor"/>
+  </g>
+
+  <path d="M 104 138 Q 147 182 190 138 Q 190 162 147 170 Q 104 162 104 138 Z" fill="currentColor" stroke="currentColor" stroke-width="3.5"/>
+  <ellipse cx="158" cy="158" rx="14" ry="4" fill="white"/>
+
+  <g class="arm">
+    <path d="M 238 58 Q 270 44 278 26" stroke="currentColor" stroke-width="6" fill="none"/>
+    <circle cx="278" cy="26" r="13" fill="white" stroke="currentColor" stroke-width="3"/>
+    <path d="M 272 17 L 268 9" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M 278 15 L 278 6" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M 284 17 L 288 9" stroke="currentColor" stroke-width="2.5"/>
+  </g>
+</svg>
