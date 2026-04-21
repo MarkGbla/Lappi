@@ -15,7 +15,13 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/api/public/") ||
     pathname.startsWith("/scan/") ||
     pathname.startsWith("/_next") ||
-    /\.(ico|png|jpe?g|svg|webp|gif|webmanifest|js|css|map|woff2?|ttf)$/i.test(pathname)
+    // Social share previews: crawlers (Discord, WhatsApp, Slack, Twitter, etc.)
+    // fetch these URLs without cookies — must never be gated by auth.
+    pathname === "/opengraph-image" ||
+    pathname === "/twitter-image" ||
+    pathname.startsWith("/opengraph-image/") ||
+    pathname.startsWith("/twitter-image/") ||
+    /\.(ico|png|jpe?g|svg|webp|gif|webmanifest|js|css|map|woff2?|ttf|xml|txt)$/i.test(pathname)
   ) {
     return NextResponse.next()
   }

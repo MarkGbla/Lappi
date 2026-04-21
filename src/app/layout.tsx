@@ -10,16 +10,41 @@ const inter = Inter({
   display: "swap",
 })
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000")
+
+const title = "Lappi — Asset Tracking for Christex Foundation"
+const description =
+  "Track devices, usage, repairs, and tech requests across staff and community members."
+
 export const metadata: Metadata = {
-  title: "Lappi — Asset Tracking for Christex Foundation",
-  description:
-    "Track devices, usage, repairs, and tech requests across staff and community members.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
   manifest: "/manifest.webmanifest",
   applicationName: "Lappi",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Lappi",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Lappi",
+    title,
+    description,
+    url: "/",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
   },
 }
 
