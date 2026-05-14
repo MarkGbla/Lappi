@@ -125,8 +125,9 @@ model Asset {
   location     String?
   purchaseDate DateTime?
   notes        String?
-  imageKeys    String[]    @default([])
-  createdAt    DateTime    @default(now())
+  imageKeys      String[]    @default([])
+  otherTypeLabel String?
+  createdAt      DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
 
   sessions UsageSession[]

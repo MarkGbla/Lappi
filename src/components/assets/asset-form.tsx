@@ -38,6 +38,7 @@ type AssetFormProps = {
     purchaseDate: Date | null
     notes: string | null
     imageKeys: string[]
+    otherTypeLabel: string | null
   }
 }
 
@@ -64,8 +65,11 @@ export function AssetForm({ asset }: AssetFormProps) {
         : "",
       notes: asset?.notes ?? "",
       imageKeys: asset?.imageKeys ?? [],
+      otherTypeLabel: asset?.otherTypeLabel ?? "",
     },
   })
+
+  const selectedType = form.watch("type")
 
   async function onSubmit(data: CreateAssetInput) {
     if (process.env.NODE_ENV !== "production") {
@@ -106,7 +110,10 @@ export function AssetForm({ asset }: AssetFormProps) {
           <Label>Type *</Label>
           <Select
             value={form.watch("type")}
-            onValueChange={(v) => form.setValue("type", v as CreateAssetInput["type"])}
+            onValueChange={(v) => {
+              form.setValue("type", v as CreateAssetInput["type"])
+              if (v !== "OTHER") form.setValue("otherTypeLabel", "")
+            }}
           >
             <SelectTrigger>
               <SelectValue />
@@ -140,6 +147,24 @@ export function AssetForm({ asset }: AssetFormProps) {
           </Select>
         </div>
       </div>
+
+      {selectedType === "OTHER" && (
+        <div className="space-y-2">
+          <Label htmlFor="otherTypeLabel">Specify device type *</Label>
+          <Input
+            id="otherTypeLabel"
+            {...form.register("otherTypeLabel")}
+            placeholder="e.g. Smart TV, VR Headset, Arduino Kit"
+            aria-invalid={!!form.formState.errors.otherTypeLabel}
+            aria-describedby={form.formState.errors.otherTypeLabel ? "otherTypeLabel-error" : undefined}
+          />
+          {form.formState.errors.otherTypeLabel && (
+            <p id="otherTypeLabel-error" className="text-sm text-destructive">
+              {form.formState.errors.otherTypeLabel.message}
+            </p>
+          )}
+        </div>
+      )}
 
       <div className="space-y-2">
         <Label htmlFor="serialNumber">Serial Number</Label>

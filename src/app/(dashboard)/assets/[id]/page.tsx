@@ -104,7 +104,11 @@ export default async function AssetDetailPage({
             </div>
             <div>
               <div className="text-xs font-medium text-muted-foreground uppercase">Type</div>
-              <div className="mt-1 text-sm">{asset.type.replace(/_/g, " ")}</div>
+              <div className="mt-1 text-sm">
+                {asset.type === "OTHER" && asset.otherTypeLabel
+                  ? asset.otherTypeLabel
+                  : asset.type.replace(/_/g, " ")}
+              </div>
             </div>
             <div>
               <div className="text-xs font-medium text-muted-foreground uppercase">Location</div>

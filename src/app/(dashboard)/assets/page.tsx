@@ -144,7 +144,11 @@ export default async function AssetsPage({
                     <StatusBadge value={asset.status} variant="status" />
                   </div>
                   <div className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>{asset.type.replace(/_/g, " ")}</span>
+                    <span>
+                      {asset.type === "OTHER" && asset.otherTypeLabel
+                        ? asset.otherTypeLabel
+                        : asset.type.replace(/_/g, " ")}
+                    </span>
                     {asset.location && (
                       <>
                         <span>&middot;</span>
@@ -205,7 +209,11 @@ export default async function AssetsPage({
                         <div className="text-xs text-muted-foreground">{asset.serialNumber}</div>
                       )}
                     </TableCell>
-                    <TableCell className="text-sm">{asset.type.replace(/_/g, " ")}</TableCell>
+                    <TableCell className="text-sm">
+                      {asset.type === "OTHER" && asset.otherTypeLabel
+                        ? asset.otherTypeLabel
+                        : asset.type.replace(/_/g, " ")}
+                    </TableCell>
                     <TableCell>
                       <StatusBadge value={asset.status} variant="status" />
                     </TableCell>

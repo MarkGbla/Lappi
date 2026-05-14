@@ -12,6 +12,15 @@ export const createAssetSchema = z.object({
   purchaseDate: z.string().optional().or(z.literal("")),
   notes: z.string().max(1000).optional().or(z.literal("")),
   imageKeys: z.array(z.string().min(1).max(200)).max(5).optional(),
+  otherTypeLabel: z.string().max(100).optional().or(z.literal("")),
+}).superRefine((data, ctx) => {
+  if (data.type === "OTHER" && !data.otherTypeLabel?.trim()) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Please specify the device type",
+      path: ["otherTypeLabel"],
+    })
+  }
 })
 
 export const updateAssetSchema = createAssetSchema.partial()
