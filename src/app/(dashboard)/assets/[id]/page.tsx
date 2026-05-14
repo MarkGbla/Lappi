@@ -14,6 +14,7 @@ import {
   healthScore,
   healthLabel,
 } from "@/lib/asset-metrics"
+import { decodeOtherType } from "@/lib/other-type"
 
 export default async function AssetDetailPage({
   params,
@@ -47,6 +48,11 @@ export default async function AssetDetailPage({
   const utilisation = utilisationRate(asset, allSessions, now)
   const health = healthScore(asset, asset.issues, now)
   const healthMeta = healthLabel(health)
+
+  const { label: otherTypeLabel, notes: displayNotes } =
+    asset.type === "OTHER"
+      ? decodeOtherType(asset.notes)
+      : { label: null, notes: asset.notes }
 
   return (
     <div className="space-y-6">
@@ -105,8 +111,8 @@ export default async function AssetDetailPage({
             <div>
               <div className="text-xs font-medium text-muted-foreground uppercase">Type</div>
               <div className="mt-1 text-sm">
-                {asset.type === "OTHER" && asset.otherTypeLabel
-                  ? asset.otherTypeLabel
+                {asset.type === "OTHER" && otherTypeLabel
+                  ? otherTypeLabel
                   : asset.type.replace(/_/g, " ")}
               </div>
             </div>
@@ -127,10 +133,10 @@ export default async function AssetDetailPage({
               </div>
             )}
           </div>
-          {asset.notes && (
+          {displayNotes && (
             <div className="mt-4 pt-4 border-t border-border">
               <div className="text-xs font-medium text-muted-foreground uppercase mb-1">Notes</div>
-              <p className="text-sm whitespace-pre-wrap">{asset.notes}</p>
+              <p className="text-sm whitespace-pre-wrap">{displayNotes}</p>
             </div>
           )}
 

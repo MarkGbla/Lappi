@@ -6,6 +6,7 @@ import { requireAuth } from "@/lib/auth-helpers"
 import { logActivity } from "@/lib/activity"
 import { createAssetSchema, updateAssetSchema } from "@/lib/validations/asset"
 import { diffFields } from "@/lib/diff"
+import { encodeOtherType } from "@/lib/other-type"
 import type { ActionResult } from "@/types"
 import { Prisma, type Asset } from "@/generated/prisma/client"
 
@@ -16,14 +17,16 @@ export async function createAsset(input: unknown): Promise<ActionResult<Asset>> 
     return { success: false, error: "Validation failed", fieldErrors: parsed.error.flatten().fieldErrors as Record<string, string[]> }
   }
 
-  const { serialNumber, purchaseDate, imageKeys, otherTypeLabel, ...rest } = parsed.data
+  const { serialNumber, purchaseDate, imageKeys, otherTypeLabel, notes, ...rest } = parsed.data
   const asset = await prisma.asset.create({
     data: {
       ...rest,
       serialNumber: serialNumber || null,
       purchaseDate: purchaseDate ? new Date(purchaseDate) : null,
       imageKeys: imageKeys ?? [],
-      otherTypeLabel: rest.type === "OTHER" ? (otherTypeLabel || null) : null,
+      notes: rest.type === "OTHER"
+        ? encodeOtherType(otherTypeLabel, notes) || null
+        : notes || null,
     },
   })
 
@@ -49,7 +52,10 @@ export async function updateAsset(id: string, input: unknown): Promise<ActionRes
   const existing = await prisma.asset.findUnique({ where: { id } })
   if (!existing) return { success: false, error: "Asset not found" }
 
-  const { serialNumber, purchaseDate, imageKeys, otherTypeLabel, ...rest } = parsed.data
+  const { serialNumber, purchaseDate, imageKeys, otherTypeLabel, notes, ...rest } = parsed.data
+  const encodedNotes = rest.type === "OTHER"
+    ? encodeOtherType(otherTypeLabel, notes) || null
+    : notes || null
   const asset = await prisma.asset.update({
     where: { id },
     data: {
@@ -57,7 +63,7 @@ export async function updateAsset(id: string, input: unknown): Promise<ActionRes
       ...(serialNumber !== undefined && { serialNumber: serialNumber || null }),
       ...(purchaseDate !== undefined && { purchaseDate: purchaseDate ? new Date(purchaseDate) : null }),
       ...(imageKeys !== undefined && { imageKeys }),
-      otherTypeLabel: rest.type === "OTHER" ? (otherTypeLabel || null) : null,
+      notes: encodedNotes,
     },
   })
 

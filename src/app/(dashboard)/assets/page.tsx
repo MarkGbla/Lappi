@@ -18,6 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import type { Prisma } from "@/generated/prisma/client"
+import { decodeOtherType } from "@/lib/other-type"
 
 const typeOptions = [
   { value: "LAPTOP", label: "Laptop" },
@@ -145,8 +146,8 @@ export default async function AssetsPage({
                   </div>
                   <div className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
                     <span>
-                      {asset.type === "OTHER" && asset.otherTypeLabel
-                        ? asset.otherTypeLabel
+                      {asset.type === "OTHER"
+                        ? (decodeOtherType(asset.notes).label ?? "Other")
                         : asset.type.replace(/_/g, " ")}
                     </span>
                     {asset.location && (
@@ -210,8 +211,8 @@ export default async function AssetsPage({
                       )}
                     </TableCell>
                     <TableCell className="text-sm">
-                      {asset.type === "OTHER" && asset.otherTypeLabel
-                        ? asset.otherTypeLabel
+                      {asset.type === "OTHER"
+                        ? (decodeOtherType(asset.notes).label ?? "Other")
                         : asset.type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell>

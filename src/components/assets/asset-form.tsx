@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
 import { createAssetSchema, type CreateAssetInput } from "@/lib/validations/asset"
 import { createAsset, updateAsset } from "@/actions/assets"
+import { decodeOtherType } from "@/lib/other-type"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -38,7 +39,6 @@ type AssetFormProps = {
     purchaseDate: Date | null
     notes: string | null
     imageKeys: string[]
-    otherTypeLabel: string | null
   }
 }
 
@@ -52,6 +52,13 @@ export function AssetForm({ asset }: AssetFormProps) {
     router.prefetch(isEditing && asset ? `/assets/${asset.id}` : "/assets")
   }, [router, isEditing, asset])
 
+  // For OTHER type, the label is encoded in the notes field — decode it here
+  // so the form shows the label input and actual notes separately.
+  const { label: existingLabel, notes: decodedNotes } =
+    asset?.type === "OTHER"
+      ? decodeOtherType(asset.notes)
+      : { label: null, notes: asset?.notes ?? null }
+
   const form = useForm<CreateAssetInput>({
     resolver: zodResolver(createAssetSchema),
     defaultValues: {
@@ -63,9 +70,9 @@ export function AssetForm({ asset }: AssetFormProps) {
       purchaseDate: asset?.purchaseDate
         ? new Date(asset.purchaseDate).toISOString().split("T")[0]
         : "",
-      notes: asset?.notes ?? "",
+      notes: decodedNotes ?? "",
       imageKeys: asset?.imageKeys ?? [],
-      otherTypeLabel: asset?.otherTypeLabel ?? "",
+      otherTypeLabel: existingLabel ?? "",
     },
   })
 
